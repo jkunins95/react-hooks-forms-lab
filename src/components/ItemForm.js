@@ -1,32 +1,51 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 function ItemForm({ onItemFormSubmit }) {
-  const [itemName, setItemName] = useState("")
-  const [itemCategory, setItemCategory] = useState("Produce")
+  const [itemName, setItemName] = useState("");
+  const [itemCategory, setItemCategory] = useState("Produce");
+  const [submitItem, setSubmittedItem] = useState([]);
+
+  function handleItemChange(e) {
+    setItemName(e.target.value);
+  }
+
+  function handleCategoryChange(e) {
+    setItemCategory(e.target.value);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const newItem = {
-      id: uuid(), 
+      id: uuid(),
       name: itemName,
       category: itemCategory,
     };
 
-    onItemFormSubmit(newItem)
+    console.log(newItem);
+    // onItemFormSubmit(newItem);
   }
-  
+
   return (
     <form className="NewItem" onSubmit={handleSubmit}>
       <label>
         Name:
-        <input type="text" name="name" value={itemName} onChange={(event) => setItemName(event.target.value)}/>
+        <input
+          type="text"
+          name="name"
+          value={itemName}
+          onChange={handleItemChange}
+        />
       </label>
 
       <label>
         Category:
-        <select name="category" category={itemCategory} onChange={(event) => setItemCategory(event.target.value)}>
+        <select
+          name="category"
+          value={itemCategory}
+          onChange={handleCategoryChange}
+        >
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>
