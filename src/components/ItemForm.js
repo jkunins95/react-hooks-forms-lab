@@ -4,7 +4,6 @@ import { v4 as uuid } from "uuid";
 function ItemForm({ onItemFormSubmit }) {
   const [itemName, setItemName] = useState("");
   const [itemCategory, setItemCategory] = useState("Produce");
-  const [submitItem, setSubmittedItem] = useState([]);
 
   function handleItemChange(e) {
     setItemName(e.target.value);
@@ -24,7 +23,10 @@ function ItemForm({ onItemFormSubmit }) {
     };
 
     console.log(newItem);
-    // onItemFormSubmit(newItem);
+    onItemFormSubmit(newItem);
+
+    setItemName("");
+    setItemCategory("Produce");
   }
 
   return (
